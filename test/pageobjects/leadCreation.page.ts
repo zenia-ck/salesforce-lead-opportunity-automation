@@ -227,7 +227,6 @@ class SalesforceLeadCreationPage extends Page {
     console.log("Waiting for the element to be clickable");
     await this.markAsComplete.waitForClickable({ timeout: 20000 });
     console.log("Clicking on mark as complete");
-    await browser.action;
     await this.markAsComplete.execute((el) => el.click());
     console.log("Waiting for the next page to load");
     await browser.pause(4000);
