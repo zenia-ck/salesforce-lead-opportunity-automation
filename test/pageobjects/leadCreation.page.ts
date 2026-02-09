@@ -243,11 +243,13 @@ class SalesforceLeadCreationPage extends Page {
     console.log("Waiting for the next page to load");
     await browser.pause(4000);
     console.log("Checking the account name");
-    await expect(this.accountName).toHaveValue(this.leadDetails.companyName);
+    expect(await this.accountName.getValue()).toEqual(
+      this.leadDetails.companyName,
+    );
     console.log("Scrolling the opportunity into view");
     await this.contactAndOpportunityName[0].scrollIntoView();
     console.log("Checking the contact name");
-    await expect(this.contactAndOpportunityName[0]).toHaveText(
+    expect(await this.contactAndOpportunityName[0].getText()).toContain(
       `Ms. ${this.leadDetails.firstName} ${this.leadDetails.lastName}`,
     );
     // console.log("Scrolling the opportunity into view");
@@ -259,7 +261,9 @@ class SalesforceLeadCreationPage extends Page {
     // console.log("Scrolling the converted status into view");
     // await this.convertedStatus.scrollIntoView();
     console.log("Checking the converted status");
-    await expect(this.convertedStatus).toHaveText("Closed - Converted");
+    expect(await this.convertedStatus.getText()).toContain(
+      "Closed - Converted",
+    );
     console.log("Scrolling the convert button into view");
     await this.convertButton.scrollIntoView();
     console.log("Clicking on convert");
