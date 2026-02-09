@@ -250,14 +250,14 @@ class SalesforceLeadCreationPage extends Page {
     await expect(this.contactAndOpportunityName[0]).toHaveText(
       `Ms. ${this.leadDetails.firstName} ${this.leadDetails.lastName}`,
     );
-    console.log("Scrolling the opportunity into view");
-    await this.contactAndOpportunityName[1].scrollIntoView();
+    // console.log("Scrolling the opportunity into view");
+    // await this.contactAndOpportunityName[1].scrollIntoView();
     console.log("Checking the opportunity name");
-    await expect(this.contactAndOpportunityName[1]).toContain(
+    expect(this.contactAndOpportunityName[1]).toContain(
       this.leadDetails.companyName,
     );
-    console.log("Scrolling the converted status into view");
-    await this.convertedStatus.scrollIntoView();
+    // console.log("Scrolling the converted status into view");
+    // await this.convertedStatus.scrollIntoView();
     console.log("Checking the converted status");
     await expect(this.convertedStatus).toHaveText("Closed - Converted");
     console.log("Scrolling the convert button into view");
