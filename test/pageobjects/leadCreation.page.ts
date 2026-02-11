@@ -151,35 +151,59 @@ class SalesforceLeadCreationPage extends Page {
 
   async switchToSalesConsoleOrg(): Promise<void> {
     await browser.pause(3500);
+    console.log("app launcher clicked");
     await this.appLauncherButton.click();
+    console.log("sales console searched");
     await this.appSearchInput.setValue("Sales Console");
+    console.log("Press enter");
     await browser.keys("Enter");
     await browser.pause(5000);
   }
 
   async leadCreation(): Promise<void> {
+    console.log("User navigation menu clicked");
     await this.userNavigationMenu.click();
+    console.log("Lead menu clicked");
     await this.leadMenu.click();
+    console.log("Lead menu button clicked");
     await this.leadMenuButton.click();
+    console.log("Waiting for the lead header to be displayed");
     await this.leadHeader.waitForDisplayed();
+    console.log("Checking the lead header is displayed");
     await expect(this.leadHeader).toBeDisplayed();
+    console.log("New lead button clicked");
     await this.newLeadButton.click();
+    console.log("Expanding the sidebar if it's not already expanded");
+    await this.expandSidebar.waitForDisplayed({ timeout: 10000 });
     const isExpanded = await this.expandSidebar.getAttribute("aria-expanded");
     if (isExpanded === "false") {
       await this.expandSidebar.click();
     }
+    console.log("Selecting salutation");
     await this.salutaionInput.click();
+    console.log("Salutation selected");
     await this.selectSalutation.click();
+    console.log("Entering first name");
     await this.firstNameInput.setValue(this.leadDetails.firstName);
+    console.log("Entering last name");
     await this.lastNameInput.setValue(this.leadDetails.lastName);
+    console.log("Entering phone number");
     await this.phoneInput.setValue(this.leadDetails.phone);
+    console.log("Entering company name");
     await this.companyInput.setValue(this.leadDetails.companyName);
+    console.log("Entering email");
     await this.emailInput.setValue(this.leadDetails.email);
+    console.log("Scrolling lead source into view");
     await this.leadSourceInput.scrollIntoView();
+    console.log("Clicking lead source");
     await this.leadSourceInput.click();
+    console.log("Clicking lead source value");
     await this.leadSourceValue.click();
+    console.log("Scrolling lead status into view");
     await this.leadStatus.scrollIntoView();
+    console.log("Checking lead status");
     await expect(this.leadStatus).toHaveText("Open - Not Contacted");
+    console.log("Saving the lead");
     await this.saveButton.click();
   }
   async validateLeadDetails(): Promise<void> {
