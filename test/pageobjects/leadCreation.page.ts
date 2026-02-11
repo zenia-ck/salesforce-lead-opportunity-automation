@@ -39,6 +39,12 @@ class SalesforceLeadCreationPage extends Page {
     return $('[title="New"][role="button"]');
   }
 
+  get expandSidebar() {
+    return $(
+      '[class="slds-button slds-button_icon split-toggle slds-split-view__toggle-button slds-is-closed slds-button_icon-xx-small slds-button_icon-border"]',
+    );
+  }
+
   get salutaionInput() {
     return $('[name="salutation"]');
   }
@@ -158,6 +164,10 @@ class SalesforceLeadCreationPage extends Page {
     await this.leadHeader.waitForDisplayed();
     await expect(this.leadHeader).toBeDisplayed();
     await this.newLeadButton.click();
+    const isExpanded = await this.expandSidebar.getAttribute("aria-expanded");
+    if (isExpanded === "false") {
+      await this.expandSidebar.click();
+    }
     await this.salutaionInput.click();
     await this.selectSalutation.click();
     await this.firstNameInput.setValue(this.leadDetails.firstName);
